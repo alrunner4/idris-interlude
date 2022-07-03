@@ -1,0 +1,4 @@
+package interlude
+modules = Interlude.CLI
+        , Interlude.List
+        , Interlude.Monad
