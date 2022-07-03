@@ -11,19 +11,25 @@ namespace ListLike
    public export
    interface Uncons (t: Type -> Type) where
       uncons: t a -> Maybe (a, t a)
+
    public export
    reverseOnto: {from, to: Type -> Type} -> Cons to => Uncons from => to a -> from a -> to a
    reverseOnto xs ys = case uncons ys of
       Nothing     => xs
       Just (y,ys) => reverseOnto( cons y xs ) ys
-   public export
+
+   %inline public export
    Cons List where cons = (::)
    public export
    Uncons List where uncons = \case
       Nil   => Nothing
       x::xs => Just( x, xs )
-   public export
-   Uncons Stream where uncons (x::xs) = Just( x, xs )
+   %inline public export
+   Cons Stream where cons x xs = x :: xs
+   %inline public export
+   Uncons Stream where uncons (x :: xs) = Just (x, xs)
+   %inline public export
+   Cons SnocList where cons x xs = xs :< x
    public export
    Uncons SnocList where uncons = \case
       Lin     => Nothing
