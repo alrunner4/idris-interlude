@@ -1,5 +1,6 @@
 module Interlude.List
 import Data.List {- length, splitAt -}
+import Data.List1
 import Data.Vect
 
 
@@ -24,6 +25,8 @@ namespace ListLike
    Uncons List where uncons = \case
       Nil   => Nothing
       x::xs => Just( x, xs )
+   public export
+   Cons List1 where cons x (y ::: ys) = x ::: (y :: ys)
    %inline public export
    Cons Stream where cons x xs = x :: xs
    %inline public export
