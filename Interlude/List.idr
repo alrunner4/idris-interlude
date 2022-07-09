@@ -1,7 +1,7 @@
 module Interlude.List
-import Data.List {- length, splitAt -}
-import Data.List1
-import Data.Vect
+import public Data.List {- length, splitAt -}
+import public Data.List1
+import public Data.Vect
 
 
 namespace ListLike
@@ -94,3 +94,23 @@ find target reference =
             then matching new_focus match_focus subT -- a match starts or continues
             else matching new_focus new_focus target -- the current_focus doesn't match
 
+||| Left-biased list midpoint.
+export
+midpoint: List a -> Maybe a
+midpoint xs = go xs (drop 1 xs) where
+   go: List a -> List a -> Maybe a
+   go (x::_) Nil = Just x
+   go (x::_) [_] = Just x
+   go (_::as) (_::_::bs) = go as bs
+   go _ _ = Nothing
+
+||| Automatic even/odd midpoint for nonempty lists.
+export
+midpoint1: List1 a -> Either (a,a) a
+midpoint1 (x  :::    []   ) = Right x
+midpoint1 (x1 ::: x2 :: xs) = go (x1 ::: x2 :: xs) (x2 ::: xs) where
+   go: List1 a -> List1 a -> Either (a,a) a
+   go (x  :::        [] )  _                     = Right x
+   go (_  ::: (x  :: xs)) (_ ::: (_ :: y :: ys)) = go (x ::: xs) (y ::: ys)
+   go (_  ::: (x  :: _ )) (_ ::: (_ ::   []   )) = Right x
+   go (x1 ::: (x2 :: _ )) (_ :::    []         ) = Left (x1, x2)
