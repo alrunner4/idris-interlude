@@ -1,4 +1,7 @@
 package interlude
+depends = stt
 modules = Interlude.CLI
+        , Interlude.Foldable
         , Interlude.List
         , Interlude.Monad
+        , Interlude.Queues
