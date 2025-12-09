@@ -1,0 +1,43 @@
+{
+  "nodes": {
+    "idrx": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1765280510,
+        "narHash": "sha256-0RS/hZ9KpjYCAyPnVTQjc0BBipxPwLFx1LjSWvpIWEg=",
+        "owner": "alrunner4",
+        "repo": "idrx",
+        "rev": "b74834aa8930337e51940e7c91f942d285b4e49b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "alrunner4",
+        "repo": "idrx",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1764947035,
+        "narHash": "sha256-EYHSjVM4Ox4lvCXUMiKKs2vETUSL5mx+J2FfutM7T9w=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "a672be65651c80d3f592a89b3945466584a22069",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "root": {
+      "inputs": {
+        "idrx": "idrx"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

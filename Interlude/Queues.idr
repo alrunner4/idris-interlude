@@ -5,6 +5,12 @@ import Data.IORef
 
 %hide Prelude.Stream.(::)
 
+---------------
+-- Operators --
+export prefix 9 *:
+export infixr 3 =:
+export infixr 3 =$
+
 
 ----------------
 -- Interfaces --
@@ -34,8 +40,6 @@ interface IDeque (m: Type -> Type) where
    (.dequeue_front): Deque a ->      m (Maybe a)
 
 namespace IORef
-   prefix 9 *:
-   infixr 3 =:
    public export (*:): IORef a ->             IO a
    public export (=:): IORef a ->       a  -> IO ()
    public export (=$): IORef a -> (a -> a) -> IO ()
@@ -44,9 +48,6 @@ namespace IORef
    (=$) = modifyIORef
 
 namespace STT
-   prefix 9 *:
-   infixr 3 =:
-   infixr 3 =$
    public export (*:): MonadST m s => VarRef {m} {s} a ->             m s a
    public export (=:): MonadST m s => VarRef {m} {s} a ->       a  -> m s ()
    public export (=$): MonadST m s => VarRef {m} {s} a -> (a -> a) -> m s ()
